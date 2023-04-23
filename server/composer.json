@@ -1,0 +1,14 @@
+{
+    "description": "Teste Back-end Magazord",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Source\\": "src/"
+        }
+    },
+    "require": {
+        "doctrine/orm": "*",
+        "symfony/cache": "^6.2",
+        "doctrine/migrations": "^3.6"
+    }
+}
