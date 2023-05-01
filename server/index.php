@@ -12,7 +12,6 @@ $httpMethod = $_SERVER['REQUEST_METHOD'];
 $uri = $_SERVER['REQUEST_URI'];
 $routeInfo = $dispatcher->dispatch($httpMethod, $uri);
 
-// Lida com o resultado da rota
 switch ($routeInfo[0]) {
     case FastRoute\Dispatcher::NOT_FOUND:
         break;

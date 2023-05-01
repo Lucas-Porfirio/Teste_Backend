@@ -11,7 +11,6 @@ class ViewTablePessoa extends ViewTable
     public function init()
     {
         $this->setTitle('Pessoas');
-        $this->getTable()->setMsgWithoutRegisters('Não há pessoas cadastradas');
         $this->getTable()
              ->addColumn('id', 'ID')
              ->addColumn('nome', 'Nome')

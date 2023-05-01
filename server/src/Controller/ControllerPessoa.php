@@ -20,9 +20,9 @@ class ControllerPessoa extends ControllerBase
     }
 
     public function index($aParam = null) {
-        if($aParam){
-            $oCriteria = Criteria::create()->where(Criteria::expr()->contains('nome', $aParam['nome']));
-            $this->getView()->loadValues($this->getModel()->getRepository()->matching($oCriteria)->getValues());
+        if($aParam['nome']){
+            $this->getView()->loadValues($this->getQueryFindByName($aParam['nome'])->getResult());
+            $this->getView()->getTable()->setFind($aParam['nome']);
             $this->getView()->render();
         }else{
             parent::index();
@@ -34,4 +34,12 @@ class ControllerPessoa extends ControllerBase
         require_once('./src/View/ViewFormPessoa.php');
     }
 
+    public function getQueryFindByName($sName) {
+        $oQueryBuilder = $this->getModel()->getEntityManager()->createQueryBuilder();
+        $oQueryBuilder->select('p')
+                      ->from('Source\Model\ModelPessoa', 'p')
+                      ->where('LOWER(p.nome) LIKE :nome')
+                      ->setParameter('nome', '%'.strtolower($sName).'%');
+        return $oQueryBuilder->getQuery();
+    }
 }
