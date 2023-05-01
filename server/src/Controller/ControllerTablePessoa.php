@@ -4,9 +4,8 @@ namespace Source\Controller;
 
 use Source\Model\ModelPessoa;
 use Source\View\ViewTablePessoa;
-use Doctrine\Common\Collections\Criteria;
 
-class ControllerPessoa extends ControllerBase
+class ControllerTablePessoa extends ControllerBase
 {
 
     public function getInstanceView()
@@ -20,7 +19,7 @@ class ControllerPessoa extends ControllerBase
     }
 
     public function index($aParam = null) {
-        if($aParam['nome']){
+        if(isset($aParam['nome'])){
             $this->getView()->loadValues($this->getQueryFindByName($aParam['nome'])->getResult());
             $this->getView()->getTable()->setFind($aParam['nome']);
             $this->getView()->render();
@@ -28,12 +27,7 @@ class ControllerPessoa extends ControllerBase
             parent::index();
         }
     }
-
-    public static function form()
-    {
-        require_once('./src/View/ViewFormPessoa.php');
-    }
-
+    
     public function getQueryFindByName($sName) {
         $oQueryBuilder = $this->getModel()->getEntityManager()->createQueryBuilder();
         $oQueryBuilder->select('p')

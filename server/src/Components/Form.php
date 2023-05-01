@@ -1,11 +1,12 @@
 <?php
-namespace Sourcer\Components;
+namespace Source\Components;
 
 use Source\Components\Field;
 
 class Form {
 
     private $fields = [];
+    private $buttons = [];
 
     public function getFields()
     {
@@ -18,14 +19,69 @@ class Form {
         return $this;
     }
 
+    public function getButtons() {
+        return $this->buttons;
+    }
+
     public function addField(Field $oField) {
         $this->fields[] = $oField;
+        return $this;
+    }
+
+    public function findField($sName) {
+        foreach($this->getFields() as $oField){
+            if($oField->getName() === $sName){
+                return $oField;
+            }
+        }
+    }
+
+    public function doVisualize() {
+        foreach($this->getFields() as $oField){
+            $oField->setDisabled(true);
+        }
+    }
+
+    public function addButtonConfirm() {
+        $this->buttons['confirm'] = '<button type="submit" class="btn btn-success mr-2">Confirmar</button>';
+    }
+
+    public function addButtonCancel($sLink) {
+        $this->buttons['cancel'] = '<a class="btn btn-danger" href="'.$sLink.'">Cancelar</a>';
+    }
+
+    public function removeButtonConfirm() {
+        unset($this->buttons['confirm']);
+    }
+
+    public function removeButtonCancel() {
+        unset($this->buttons['cancel']);
+    }
+
+    public function loadValues(array $aValues) {
+        $oValues = $aValues[0];
+        foreach($this->getFields() as $oField){
+            $oField->setValue($oValues->{'get'.$oField->getName()}());
+        }
+    }
+
+    public function getContentFields() {
+        $aFields = array_map(function($oField) {
+            return $oField->getContent();
+        }, $this->getFields());
+        return implode('', $aFields);
+    }
+
+    public function getContentButtons() {
+        $aButtons = array_map(function($sButton) {
+            return $sButton;
+        }, $this->getButtons());
+        return implode('', $aButtons);
     }
 
     public function getContent() {
-        $sFields = array_map(function($oField) {
-            return $oField->getContent();
-        }, $this->getFields());
-        return $sFields;
+        $sFields = $this->getContentFields();
+        $sButtons = $this->getContentButtons();
+        return $sFields.$sButtons;
     }
 }

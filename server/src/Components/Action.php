@@ -32,15 +32,15 @@ class Action {
     }
 
     public function getDelete() {
-        return '<a href="/'.$this->getLink().'/confirm-delete//'.$this->getKey().'"><i class="bi ms-3 bi-trash"></i></a>';
+        return '<a href="/'.$this->getLink().'/confirm-delete/'.$this->getKey().'"><i class="bi ms-3 bi-trash"></i></a>';
     }
 
     public function getEdit() {
-        return '<a href="/'.$this->getLink().'/edit//'.$this->getKey().'"><i class="bi ms-3 bi-pencil"></i></a>';
+        return '<a href="/'.$this->getLink().'/edit/'.$this->getKey().'"><i class="bi ms-3 bi-pencil"></i></a>';
     }
 
     public function getVisualize() {
-        return '<a href="/'.$this->getLink().'/view//'.$this->getKey().'"><i class="bi bi-eye-fill"></i></a>';
+        return '<a href="/'.$this->getLink().'/view/'.$this->getKey().'"><i class="bi bi-eye-fill"></i></a>';
     }
 
     public function loadActions() {

@@ -2,7 +2,6 @@
 
 namespace Source\View;
 
-use Source\Components\Table;
 use Source\Components\Action;
 
 class ViewTablePessoa extends ViewTable
