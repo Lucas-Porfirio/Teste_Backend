@@ -3,19 +3,19 @@ namespace Source\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping\OneToMany;
-/**
- * @ORM\Entity(repositoryClass="Source\Model")
- * @ORM\Table(name="pessoa")
- */
-class ModelPessoa
+use Doctrine\ORM\Mapping as ORM;
+
+
+#[ORM\Entity, ORM\Table('pessoa')]
+class ModelPessoa extends ModelBase
 {
-    /** @ORM\Id @ORM\Column(type="integer") @ORM\GeneratedValue */
+    #[ORM\Id, ORM\Column('id', 'integer'), ORM\GeneratedValue]
     private $id;
 
-    /** @ORM\Column(type="sting", nullable=false) */
+    #[ORM\Column('nome', 'string')]
     private $nome;
 
-    /** @ORM\Column(type="string", nullable=false) */
+    #[ORM\Column('cpf', 'string')]
     private $cpf;
 
     /**

@@ -1,20 +1,19 @@
 <?php
 namespace Source\Model;
+use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping\JoinColumn;
-/**
- * @ORM\Entity(repositoryClass="Source\Model")
- * @ORM\Table(name="contato")
- */
-class ModelContato
+
+#[ORM\Entity, ORM\Table('contato')]
+class ModelContato extends ModelBase
 {
-    /** @ORM\Id @ORM\Column(type="integer") @ORM\GeneratedValue */
+    #[ORM\Id, ORM\Column('id', 'integer'), ORM\GeneratedValue]
     private $id;
 
-    /** @ORM\Column(type="boolean", nullable=false) */
+    #[ORM\Column('tipo', 'boolean')]
     private $tipo;
 
-    /** @ORM\Column(type="sting", nullable=true) */
+    #[ORM\Column('descricao', 'string', nullable:true)]
     private $descricao;
 
     #[ManyToOne(targetEntity: ModelPessoa::class, inversedBy: 'pessoa')]

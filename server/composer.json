@@ -9,6 +9,7 @@
     "require": {
         "doctrine/orm": "*",
         "symfony/cache": "^6.2",
-        "doctrine/migrations": "^3.6"
+        "doctrine/migrations": "^3.6",
+        "nikic/fast-route": "^1.3"
     }
 }
