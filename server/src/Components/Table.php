@@ -70,7 +70,7 @@ class Table
     {
         foreach ($aValues as $oValue) {
             $aColumns = array_map(function ($sName) use ($oValue) {
-                return '<td>' . $oValue->{'get' . $sName}() . '</td>';
+                return '<td>' . $this->_get($oValue, $sName) . '</td>';
             }, array_keys($this->getColumns()));
             if ($this->getAction()) {
                 $this->getAction()->setKey($oValue->getId());
@@ -78,6 +78,15 @@ class Table
             }
             $this->addLine('<tr>' . implode('', $aColumns) . '</tr>');
         };
+    }
+    protected function _get($oModel, $sName) {
+        $aRoute = explode('_', $sName);
+        if(count($aRoute) > 1){
+            $sMethod = array_shift($aRoute);
+            return $this->_get($oModel->{'getModel'.$sMethod}(), implode('_', $aRoute));
+        }
+        $oModel = $oModel->getRepository()->find($oModel->getId());
+        return $oModel->{'get'.array_shift($aRoute)}();
     }
 
     public function getTableHeaders()

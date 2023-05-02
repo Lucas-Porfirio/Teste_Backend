@@ -43,4 +43,43 @@ return function (RouteCollector $routes) {
         header("Location: /");
         exit;
     });
+
+    $routes->addRoute('GET', '/contato', function($aParam) {
+        $oController = new \Source\Controller\ControllerTableContato();
+        $oController->index($aParam);
+    });
+    $routes->addRoute('GET', '/contato/new', function() {
+        $oController = new \Source\Controller\ControllerFormContato();
+        $oController->form();
+    });
+    $routes->addRoute('POST', '/contato/new', function() {
+        $oController = new \Source\Controller\ControllerFormContato();
+        $oController->create($_POST);
+        header("Location: /");
+        exit;
+    });
+    $routes->addRoute('GET', '/contato/edit/{id:\d+}', function($aParam) {
+        $oController = new \Source\Controller\ControllerFormContato();
+        $oController->form($aParam, $_POST);
+    });
+    $routes->addRoute('POST', '/contato/edit/{id:\d+}', function($aParam) {
+        $oController = new \Source\Controller\ControllerFormContato();
+        $oController->update($aParam, $_POST);
+        header("Location: /");
+        exit;
+    });
+    $routes->addRoute('GET', '/contato/view/{id:\d+}', function($aParam) {
+        $oController = new \Source\Controller\ControllerFormContato();
+        $oController->show($aParam);
+    });
+    $routes->addRoute('GET', '/contato/confirm-delete/{id:\d+}', function($aParam) {
+        $oController = new \Source\Controller\ControllerFormContato();
+        $oController->confirmDelete($aParam);
+    });
+    $routes->addRoute('POST', '/contato/confirm-delete/{id:\d+}', function($aParam) {
+        $oController = new \Source\Controller\ControllerFormContato();
+        $oController->delete($aParam);
+        header("Location: /");
+        exit;
+    });
 };

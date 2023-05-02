@@ -16,11 +16,11 @@ class ModelContato extends ModelBase
     #[ORM\Column('descricao', 'string', nullable:true)]
     private $descricao;
 
-    #[ManyToOne(targetEntity: ModelPessoa::class, inversedBy: 'pessoa')]
+    // #[ManyToOne(targetEntity: ModelPessoa::class, inversedBy: 'pessoa', cascade:["persist"])]
     #[JoinColumn(name: 'idPessoa', referencedColumnName: 'id')]
     private ModelPessoa|null $ModelPessoa = null;
 
-    public function setId(int $id): void
+    public function setId(?int $id): void
     {
         $this->id = $id;
     }
@@ -50,5 +50,15 @@ class ModelContato extends ModelBase
         return $this->descricao;
     }
 
-    
+    public function getModelPessoa() : ModelPessoa
+    {
+        $this->ModelPessoa ??= new ModelPessoa();
+        return $this->ModelPessoa;
+    }
+
+    public function setModelPessoa(ModelPessoa $ModelPessoa)
+    {
+        $this->ModelPessoa = $ModelPessoa;
+        return $this;
+    }
 }

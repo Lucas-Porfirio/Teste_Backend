@@ -1,8 +1,6 @@
 <?php
 namespace Source\Components;
 
-use Source\Components\Field;
-
 class Form {
 
     private $fields = [];
@@ -23,7 +21,7 @@ class Form {
         return $this->buttons;
     }
 
-    public function addField(Field $oField) {
+    public function addField(Field | Select $oField) {
         $this->fields[] = $oField;
         return $this;
     }
@@ -85,4 +83,5 @@ class Form {
         $sButtons = $this->getContentButtons();
         return str_replace('{{content}}', $sFields.$sButtons, $sForm);
     }
+
 }
