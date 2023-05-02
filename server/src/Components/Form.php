@@ -80,8 +80,9 @@ class Form {
     }
 
     public function getContent() {
+        $sForm = file_get_contents('/var/www/html/src/Components/Pages/form.html');
         $sFields = $this->getContentFields();
         $sButtons = $this->getContentButtons();
-        return $sFields.$sButtons;
+        return str_replace('{{content}}', $sFields.$sButtons, $sForm);
     }
 }

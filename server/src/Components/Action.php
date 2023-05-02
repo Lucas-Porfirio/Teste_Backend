@@ -31,6 +31,10 @@ class Action {
         return $this;
     }
 
+    public function getCreate() {
+        return '<a class="btn btn-success mr-2 mb-4" href="/'.$this->getLink().'/new'.'">Novo</a>';
+    }
+
     public function getDelete() {
         return '<a href="/'.$this->getLink().'/confirm-delete/'.$this->getKey().'"><i class="bi ms-3 bi-trash"></i></a>';
     }

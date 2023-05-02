@@ -5,7 +5,7 @@ namespace Source\Controller;
 use Source\Model\ModelPessoa;
 use Source\View\ViewFormPessoa;
 
-class ControllerFormPessoa extends ControllerBase
+class ControllerFormPessoa extends ControllerForm
 {
 
     public function getInstanceView()
@@ -23,6 +23,9 @@ class ControllerFormPessoa extends ControllerBase
         if(isset($aParam['id'])){
             $this->getView()->loadValues([$this->getModel()->getRepository()->find($aParam['id'])]);
             $this->getView()->getForm()->findField('id')->setDisabled(true);
+            $this->getView()->setTitle('Alterar Pessoa');
+        }else{
+            $this->getView()->getForm()->findField('id')->setHidden(true);
         }
         $this->getView()->render();
     }
@@ -30,6 +33,15 @@ class ControllerFormPessoa extends ControllerBase
     public function show($aParam) {
         $this->getView()->getForm()->doVisualize();
         $this->getView()->getForm()->removeButtonConfirm();
-        $this->form($aParam);
+        $this->getView()->loadValues([$this->getModel()->getRepository()->find($aParam['id'])]);
+        $this->getView()->setTitle('Visualizar Pessoa');
+        $this->getView()->render();
+    }
+
+    public function confirmDelete($aParam) {
+        $this->getView()->getForm()->doVisualize();
+        $this->getView()->loadValues([$this->getModel()->getRepository()->find($aParam['id'])]);
+        $this->getView()->setTitle('Excluir Pessoa');
+        $this->getView()->render();
     }
 }

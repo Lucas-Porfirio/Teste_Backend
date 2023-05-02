@@ -93,6 +93,6 @@ class Table
         $sTable = str_replace('{{Columns.title}}', implode('', $this->getTableHeaders()), $sTable);
         $sTable = str_replace('{{find}}', $this->getFind(), $sTable);
         $sTable = str_replace('{{Columns.values}}', $this->getLines() ? implode('', $this->getLines()) : $this->getMsgWithoutRegisters(), $sTable);
-        return $sTable;
+        return $this->getAction()->getCreate().$sTable;
     }
 }
