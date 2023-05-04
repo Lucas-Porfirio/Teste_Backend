@@ -5,13 +5,14 @@ namespace Source\Components;
 class Field
 {
 
-    public function __construct($sType, $sName, $sTitle, $sLength = '', $sPlaceHolder = '')
+    public function __construct($sType, $sName, $sTitle, $sLength = '', $sPlaceHolder = '', $bRequired = true)
     {
         $this->setType($sType);
         $this->setName($sName);
         $this->setTitle($sTitle);
         $this->setLength($sLength);
         $this->setPlaceHolder($sPlaceHolder);
+        $this->setRequired($bRequired);
     }
 
     private $value = '';
@@ -21,7 +22,7 @@ class Field
     private $title;
     private $disabled = false;
     private $hidden = false;
-    private $required = true;
+    private $required;
     private $expr = '';
     private $length;
 

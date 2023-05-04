@@ -17,4 +17,5 @@ class ViewTableContato extends ViewTable
              ->addColumn('Pessoa_nome', 'Nome');
         $this->getTable()->addAction(new Action('contato'));
     }
+
 }

@@ -59,11 +59,19 @@ class Form {
     public function loadValues(array $aValues) {
         $oValues = $aValues[0];
         foreach($this->getFields() as $oField){
-            $sMethod = 'get'.$oField->getName();
-            if(method_exists($oValues, $sMethod)){
-                $oField->setValue($oValues->$sMethod());
+            $oField->setValue($this->_get($oValues, $oField->getName()));
+        }
+    }
+
+    protected function _get($oModel, $sName) {
+        $aRoute = explode('_', $sName);
+        if(count($aRoute) > 1){
+            $sMethod = array_shift($aRoute);
+            if(method_exists($oModel, 'getModel'.$sMethod)){
+                return $this->_get($oModel->{'getModel'.$sMethod}(), implode('_', $aRoute));
             }
         }
+        return $oModel->{'get'.array_shift($aRoute)}();
     }
 
     public function getContentFields() {

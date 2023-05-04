@@ -26,7 +26,12 @@ abstract class ViewBase
         $sIndex = file_get_contents('/var/www/html/src/Components/Pages/index.html');
         $sIndex = str_replace('{{title}}', $this->getTitle(), $sIndex);
         $sIndex = str_replace('{{content}}', $this->getContent(), $sIndex);
+        $sIndex = str_replace('{{script}}', $this->getScript(), $sIndex);
         echo $sIndex;
+    }
+
+    public function getScript(){
+        return '';
     }
 
     abstract public function getContent();

@@ -11,11 +11,12 @@ class ViewFormContato extends ViewForm
     {
         $this->setTitle('Contatos');
         $this->getForm()
-             ->addField(new Field('number', 'id', 'ID'))
+             ->addField(new Field('number', 'id', 'ID', '', '', false))
              ->addField(new Select('tipo', 'Tipo'))
              ->addField(new Field('text', 'descricao', 'Descrição'))
              ->addField(new Select('Pessoa_id', 'Pessoa'));
         $this->getForm()->addButtonConfirm();
         $this->getForm()->addButtonCancel('/contato');
     }
+
 }

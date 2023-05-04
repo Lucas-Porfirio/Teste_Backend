@@ -89,6 +89,7 @@ class Table
             $this->addLine('<tr>' . implode('', $aColumns) . '</tr>');
         };
     }
+    
     protected function _get($oModel, $sName) {
         $aRoute = explode('_', $sName);
         if(count($aRoute) > 1){

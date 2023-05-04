@@ -17,4 +17,5 @@ class ViewTablePessoa extends ViewTable
         $this->getTable()->addAction(new Action('pessoa'));
         $this->getTable()->setUseSearch(true);
     }
+
 }
