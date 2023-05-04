@@ -24,7 +24,7 @@ abstract class ControllerForm extends ControllerBase
     public function create($aData) {
         $aData['id'] = null;
         $this->loadData($this->getModel(), $aData);
-        $this->getModel()->getEntityManager()->persist($this->getModel());
+        $this->getModel()->getEntityManager()->merge($this->getModel());
         $this->getModel()->getEntityManager()->flush();
     }
 
@@ -39,7 +39,9 @@ abstract class ControllerForm extends ControllerBase
 
     public function loadData($oModel, $aData) {
         foreach($aData as $sKey => $xData){
-            $oModel->{'set'.$sKey}($xData);
+            if(method_exists($oModel, 'set'.$sKey)){
+                $oModel->{'set'.$sKey}($xData);
+            }
         }
     }
 }

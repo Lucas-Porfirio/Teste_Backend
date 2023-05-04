@@ -27,8 +27,7 @@ class ControllerFormContato extends ControllerForm
         }else{
             $this->getView()->getForm()->findField('id')->setHidden(true);
         }
-        $this->getView()->getForm()->findField('Pessoa_id')->loadValues($this->getValuesSelectPessoa());
-        $this->getView()->getForm()->findField('tipo')->loadValues($this->getValuesSelectTipo());
+        $this->loadValuesSelects();
         $this->getView()->render();
     }
 
@@ -36,6 +35,7 @@ class ControllerFormContato extends ControllerForm
         $this->getView()->getForm()->doVisualize();
         $this->getView()->getForm()->removeButtonConfirm();
         $this->getView()->loadValues([$this->getModel()->getRepository()->find($aParam['id'])]);
+        $this->loadValuesSelects();
         $this->getView()->setTitle('Visualizar Contato');
         $this->getView()->render();
     }
@@ -43,8 +43,14 @@ class ControllerFormContato extends ControllerForm
     public function confirmDelete($aParam) {
         $this->getView()->getForm()->doVisualize();
         $this->getView()->loadValues([$this->getModel()->getRepository()->find($aParam['id'])]);
+        $this->loadValuesSelects();
         $this->getView()->setTitle('Excluir Contato');
         $this->getView()->render();
+    }
+
+    protected function loadValuesSelects() {
+        $this->getView()->getForm()->findField('Pessoa_id')->loadValues($this->getValuesSelectPessoa());
+        $this->getView()->getForm()->findField('tipo')->loadValues($this->getValuesSelectTipo());
     }
 
     protected function getValuesSelectPessoa() {
@@ -70,8 +76,7 @@ class ControllerFormContato extends ControllerForm
     }
 
     public function create($aData) {
-        $this->getModel()->getModelPessoa()->setId($aData['Pessoa_id']);
-        unset($aData['Pessoa_id']);
+        $this->getModel()->setModelPessoa($this->getModel()->getModelPessoa()->getRepository()->find($aData['Pessoa_id']));
         parent::create($aData);
     }
 }

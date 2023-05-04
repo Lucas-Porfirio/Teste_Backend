@@ -16,7 +16,7 @@ class ModelContato extends ModelBase
     #[ORM\Column('descricao', 'string', nullable:true)]
     private $descricao;
 
-    // #[ManyToOne(targetEntity: ModelPessoa::class, inversedBy: 'pessoa', cascade:["persist"])]
+    #[ManyToOne(targetEntity: ModelPessoa::class, inversedBy:'contato')]
     #[JoinColumn(name: 'idPessoa', referencedColumnName: 'id')]
     private ModelPessoa|null $ModelPessoa = null;
 
@@ -60,5 +60,9 @@ class ModelContato extends ModelBase
     {
         $this->ModelPessoa = $ModelPessoa;
         return $this;
+    }
+
+    public function getDescricaoTipo() {
+        return $this->getTipo() ? 'Email' : 'Telefone';
     }
 }

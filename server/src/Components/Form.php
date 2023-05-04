@@ -59,7 +59,10 @@ class Form {
     public function loadValues(array $aValues) {
         $oValues = $aValues[0];
         foreach($this->getFields() as $oField){
-            $oField->setValue($oValues->{'get'.$oField->getName()}());
+            $sMethod = 'get'.$oField->getName();
+            if(method_exists($oValues, $sMethod)){
+                $oField->setValue($oValues->$sMethod());
+            }
         }
     }
 

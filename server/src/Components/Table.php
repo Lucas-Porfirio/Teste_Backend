@@ -85,7 +85,6 @@ class Table
             $sMethod = array_shift($aRoute);
             return $this->_get($oModel->{'getModel'.$sMethod}(), implode('_', $aRoute));
         }
-        $oModel = $oModel->getRepository()->find($oModel->getId());
         return $oModel->{'get'.array_shift($aRoute)}();
     }
 

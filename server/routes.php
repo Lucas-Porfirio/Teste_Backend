@@ -6,7 +6,7 @@ return function (RouteCollector $routes) {
         $oController = new \Source\Controller\ControllerTablePessoa();
         $oController->index($aParam);
     });
-    $routes->addRoute('POST', '/', function($aParam) {
+    $routes->addRoute('POST', '/', function() {
         $oController = new \Source\Controller\ControllerTablePessoa();
         $oController->index($_POST);
     });
@@ -48,6 +48,10 @@ return function (RouteCollector $routes) {
         $oController = new \Source\Controller\ControllerTableContato();
         $oController->index($aParam);
     });
+    $routes->addRoute('POST', '/contato', function() {
+        $oController = new \Source\Controller\ControllerTableContato();
+        $oController->index($_POST);
+    });
     $routes->addRoute('GET', '/contato/new', function() {
         $oController = new \Source\Controller\ControllerFormContato();
         $oController->form();
@@ -55,7 +59,7 @@ return function (RouteCollector $routes) {
     $routes->addRoute('POST', '/contato/new', function() {
         $oController = new \Source\Controller\ControllerFormContato();
         $oController->create($_POST);
-        header("Location: /");
+        header("Location: /contato");
         exit;
     });
     $routes->addRoute('GET', '/contato/edit/{id:\d+}', function($aParam) {
@@ -65,7 +69,7 @@ return function (RouteCollector $routes) {
     $routes->addRoute('POST', '/contato/edit/{id:\d+}', function($aParam) {
         $oController = new \Source\Controller\ControllerFormContato();
         $oController->update($aParam, $_POST);
-        header("Location: /");
+        header("Location: /contato");
         exit;
     });
     $routes->addRoute('GET', '/contato/view/{id:\d+}', function($aParam) {
@@ -79,7 +83,7 @@ return function (RouteCollector $routes) {
     $routes->addRoute('POST', '/contato/confirm-delete/{id:\d+}', function($aParam) {
         $oController = new \Source\Controller\ControllerFormContato();
         $oController->delete($aParam);
-        header("Location: /");
+        header("Location: /contato");
         exit;
     });
 };

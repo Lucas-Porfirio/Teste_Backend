@@ -25,7 +25,7 @@ final class Version20230423211009 extends AbstractMigration
         $table->addColumn('idPessoa', Types::INTEGER);
         $table->addColumn('tipo', Types::BOOLEAN)->setNotnull(true);
         $table->addColumn('descricao', Types::STRING);
-        $table->addForeignKeyConstraint('pessoa', ['idPessoa'], ['id']);
+        $table->addForeignKeyConstraint('pessoa', ['idPessoa'], ['id'], ['onDelete' => 'CASCADE']);
         $table->setPrimaryKey(['id']);
 
     }

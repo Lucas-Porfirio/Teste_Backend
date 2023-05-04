@@ -12,7 +12,7 @@ class ViewTableContato extends ViewTable
         $this->setTitle('Contatos');
         $this->getTable()
              ->addColumn('id', 'ID')
-             ->addColumn('tipo', 'Tipo')
+             ->addColumn('descricaoTipo', 'Tipo')
              ->addColumn('descricao', 'Descrição')
              ->addColumn('Pessoa_nome', 'Nome');
         $this->getTable()->addAction(new Action('contato'));

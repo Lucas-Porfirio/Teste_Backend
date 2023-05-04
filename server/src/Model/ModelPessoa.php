@@ -21,7 +21,7 @@ class ModelPessoa extends ModelBase
     /**
      * @var Collection<int, ModelPessoa>
      */
-    #[OneToMany(targetEntity: ModelContato::class, mappedBy: 'contato')]
+    #[OneToMany(targetEntity: ModelContato::class, mappedBy: 'pessoa')]
     private Collection $ModelContato;
 
     public function __construct() {
@@ -56,5 +56,16 @@ class ModelPessoa extends ModelBase
     public function getCpf(): ?string
     {
         return $this->cpf;
+    }
+
+    public function getModelContato()
+    {
+        return $this->ModelContato;
+    }
+
+    public function setModelContato(Collection $ModelContato)
+    {
+        $this->ModelContato = $ModelContato;
+        return $this;
     }
 }
