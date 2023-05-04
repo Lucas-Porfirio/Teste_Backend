@@ -15,6 +15,7 @@ class Select {
     private $title;
     private $disabled = false;
     private $hidden = false;
+    private $required = true;
 
     public function getOptions()
     {
@@ -88,6 +89,15 @@ class Select {
         return $this;
     }
 
+    public function getRequired(){
+        return $this->required;
+    }
+
+    public function setRequired($bRequired) {
+        $this->required = $bRequired;
+        return $this;
+    }
+
     public function loadValues($aValues) {
         foreach($aValues as $aValue) {
             $sSelected = $this->getValue() == $aValue['value'] ? 'selected' : '';
@@ -104,6 +114,7 @@ class Select {
         $sSelect = str_replace('{{hidden}}', $this->getHidden() ? 'hidden' : '', $sSelect);
         $sSelect = str_replace('{{disabled}}', $this->getDisabled() ? 'disabled' : '', $sSelect);
         $sSelect = str_replace('{{options}}', implode('', $this->getOptions()), $sSelect);
+        $sSelect = str_replace('{{required}}', $this->getRequired() ? 'required' : '', $sSelect);
         return $sSelect;
     }
 

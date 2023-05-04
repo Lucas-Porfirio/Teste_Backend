@@ -11,6 +11,7 @@ class Table
     private $action;
     private $find = '';
     private $msgWithoutRegisters = '<tr><td class="font-weight-bold text-center" colspan="9">Registro não encontrado</td></tr>';
+    private $useSearch= false;
 
     public function getColumns()
     {
@@ -66,6 +67,15 @@ class Table
         return $this;
     }
 
+    public function getUseSearch() {
+        return $this->useSearch;
+    }
+
+    public function setUseSearch(bool $bUseSearch) {
+        $this->useSearch= $bUseSearch;
+        return $this;
+    }
+
     public function loadValues($aValues)
     {
         foreach ($aValues as $oValue) {
@@ -99,7 +109,12 @@ class Table
     {
         $sTable = file_get_contents('/var/www/html/src/Components/Pages/table.html');
         $sTable = str_replace('{{Columns.title}}', implode('', $this->getTableHeaders()), $sTable);
-        $sTable = str_replace('{{find}}', $this->getFind(), $sTable);
+        if($this->getUseSearch()){
+            $sSearch = file_get_contents('/var/www/html/src/Components/Pages/searchBar.html');
+            $sSearch = str_replace('{{find}}', $this->getFind(), $sSearch);
+            $sTable = $sSearch.$sTable;
+        }
+        
         $sTable = str_replace('{{Columns.values}}', $this->getLines() ? implode('', $this->getLines()) : $this->getMsgWithoutRegisters(), $sTable);
         return $this->getAction()->getCreate().$sTable;
     }

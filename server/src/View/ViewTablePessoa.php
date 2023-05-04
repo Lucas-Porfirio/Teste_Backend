@@ -15,5 +15,6 @@ class ViewTablePessoa extends ViewTable
              ->addColumn('nome', 'Nome')
              ->addColumn('cpf', 'CPF');
         $this->getTable()->addAction(new Action('pessoa'));
+        $this->getTable()->setUseSearch(true);
     }
 }

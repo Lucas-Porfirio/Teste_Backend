@@ -21,6 +21,7 @@ class Field
     private $title;
     private $disabled = false;
     private $hidden = false;
+    private $required = true;
     private $expr = '';
     private $length;
 
@@ -106,6 +107,15 @@ class Field
         return $this;
     }
 
+    public function getRequired(){
+        return $this->required;
+    }
+
+    public function setRequired($bRequired) {
+        $this->required = $bRequired;
+        return $this;
+    }
+
     public function getExpr()
     {
         return $this->expr;
@@ -141,6 +151,7 @@ class Field
         $sField = str_replace('{{disabled}}', $this->getDisabled() ? 'disabled' : '', $sField);
         $sField = str_replace('{{expr}}', $this->getExpr() ? 'preg="'.$this->getExpr().'"' : '', $sField);
         $sField = str_replace('{{length}}', $this->getLength(), $sField);
+        $sField = str_replace('{{required}}', $this->getRequired() ? 'required' : '', $sField);
         return $sField;
     }
 
